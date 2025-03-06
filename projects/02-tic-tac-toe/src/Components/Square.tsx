@@ -3,14 +3,15 @@ import React from "react";
 interface SquareProps
 {
     children: React.ReactNode;
-    updateBoard: () => void;
-    index: number
+    updateBoard?: () => void;
+    isSelected?: boolean
 }
 
-const Square: React.FC<SquareProps> = ({children, updateBoard, index}) =>
+const Square: React.FC<SquareProps> = ({children, updateBoard, isSelected = false}) =>
 {
+    const className = `square ${isSelected ? 'is-selected' : ''}`
     return(
-        <div className="square" key={index} onClick={updateBoard}>
+        <div className={className} onClick={updateBoard}>
             <span className="cell__content">
                 {children}
             </span>
