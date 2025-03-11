@@ -2,9 +2,10 @@ import Square from "./Square";
 
 interface WinnerModalProps{
     winner: string | null;
+    onResetGameClick: () => void
 }
 
-const WinnerModal: React.FC<WinnerModalProps> = ({winner}) =>
+const WinnerModal: React.FC<WinnerModalProps> = ({winner, onResetGameClick}) =>
 {
     const text: string = winner === "EMPATE" ? "Empate" : "Gano:";
     if (winner === null) return;
@@ -17,11 +18,11 @@ const WinnerModal: React.FC<WinnerModalProps> = ({winner}) =>
                 </h2>
 
                 <header className="win">
-                    {winner && <Square>{winner}</Square>}
+                    {winner !== "EMPATE" && <Square>{winner}</Square>}
                 </header>
 
                 <footer>
-                    <button>Empezar de nuevo</button>
+                    <button onClick={onResetGameClick}>Empezar de nuevo</button>
                 </footer>
             </div>
         </section>
