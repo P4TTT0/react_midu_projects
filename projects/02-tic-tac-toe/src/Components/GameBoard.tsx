@@ -1,6 +1,6 @@
 import React from "react"
-import Square from "./Square"
 import { TURNS } from "../constants";
+import Square from "./Square";
 
 interface GameBoardProps
 {
