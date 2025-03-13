@@ -1,0 +1,43 @@
+main{
+    max-width: 500px;
+    padding: 20px
+}
+
+h1
+{
+    text-align: start;
+}
+
+img
+{
+    border-radius: 20px;
+    width: 300px;
+}
+
+p
+{
+    text-align: start;
+}
+
+section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4rem;
+}
+
+@media (max-width: 500px) {
+    section {
+        flex-direction: column;
+    }
+
+    h1
+    {
+        text-align: center;
+    }
+
+    p
+    {
+        text-align: justify;
+    }
+}
