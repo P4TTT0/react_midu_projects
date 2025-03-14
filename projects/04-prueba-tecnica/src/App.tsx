@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./App.css"
-import { showError } from "./functions/notify";
 import { getFactAsync } from "./services/catFactService";
-import { getCatImageAsync } from "./services/catImageService";
+import { useCatImage } from "./customHooks/useCatImage";
+import { useError } from "./contexts/errorContext";
+import { enqueueSnackbar } from "notistack";
 
 export const App : React.FC = () =>
 {
@@ -10,28 +11,13 @@ export const App : React.FC = () =>
     {
         getFactAsync()
             .then(fact => setFact(fact))
-            .catch(error => setFactError(error));
+            .catch(error => showError(error));
     } 
 
-    const updateCatImage = () =>
-    {
-        if (fact) 
-        {
-            getCatImageAsync(fact)
-                .then(url => setImageUrl(url))
-                .catch(error => setFactError(error));
-        }
-    }
-    
     const [fact, setFact] = useState<string>();
-    const [imageUrl, setImageUrl] = useState<string>();
-    const [factError, setFactError] = useState<string>();
+    const { imageUrl } = useCatImage({fact});
+    const { showError } = useError();
     useEffect(updateFact, []);
-    useEffect(updateCatImage, [fact]);
-    useEffect(() => {
-        if (factError)
-            showError(factError)
-    }, [factError])
 
     return(
         <main>
