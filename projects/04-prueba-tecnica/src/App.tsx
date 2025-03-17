@@ -1,29 +1,18 @@
-import React, { useEffect, useState } from "react";
 import "./App.css"
-import { getFactAsync } from "./services/catFactService";
 import { useCatImage } from "./customHooks/useCatImage";
-import { useError } from "./contexts/errorContext";
-import { enqueueSnackbar } from "notistack";
+import { useCatFact } from "./customHooks/useCatFact";
+import React from "react";
 
 export const App : React.FC = () =>
 {
-    const updateFact = () =>
-    {
-        getFactAsync()
-            .then(fact => setFact(fact))
-            .catch(error => showError(error));
-    } 
-
-    const [fact, setFact] = useState<string>();
+    const { fact, refreshFact } = useCatFact();
     const { imageUrl } = useCatImage({fact});
-    const { showError } = useError();
-    useEffect(updateFact, []);
 
     return(
         <main>
             <header>
                 <h1>App de gatitos!</h1>
-                <button onClick={updateFact}>
+                <button onClick={refreshFact}>
                     Otro fact!
                 </button>
             </header>
