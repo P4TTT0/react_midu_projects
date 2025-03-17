@@ -18,3 +18,7 @@ export default defineConfig({
 `"scripts": {
     "lint:fix": "ts-standard --fix"
   }`
+
+# Hacer test e2e
+## Instalar playwright: npm init playwright@latest
+## Correr los tests: npx playwright test
