@@ -5,7 +5,6 @@ import { searchMovie } from "../services/searchMovieService";
 import { MovieSearchResponse } from "../types/movieSearchResult";
 
 const useMovieSearch = ({ searchText }: SearchParams) => {
-  const [hasMovies, setHasMovies] = useState(false);
   const [movies, setMovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -16,16 +15,14 @@ const useMovieSearch = ({ searchText }: SearchParams) => {
     searchMovie({ searchText }).then((response: MovieSearchResponse) => {
       if (response.Response === "True") {
         setMovies(response.Search);
-        setHasMovies(true);
       } else {
         setMovies([]);
-        setHasMovies(false);
       }
       setIsLoading(false);
     });
   }, [searchText]);
 
-  return { hasMovies, movies, isLoading };
+  return { movies, isLoading };
 };
 
 export default useMovieSearch;

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import "./App.css";
-import { Movie } from "./types/movie";
 import useMovieSearch from "./customHooks/useMovieSearch";
+import MovieList from "./components/MovieList";
 
 export function App()
 {
     const [searchText, setSearchText] = useState("");
-    const { movies, hasMovies, isLoading } = useMovieSearch({ searchText });
+    const { movies, isLoading } = useMovieSearch({ searchText });
 
     return(
         <>
@@ -24,21 +24,7 @@ export function App()
                 </header>
 
                 <main>
-                    {
-                        hasMovies ?
-                        (
-                            movies!.map(movie => (
-                                <li key={movie.imdbID}>
-                                    <h3>{movie.Title}</h3>
-                                    <p>{movie.Year}</p>
-                                    <img src={movie.Poster} alt={movie.Title} />
-                                </li>
-                            ))
-                        )
-                        : (
-                            <p>Sin resultados :(</p>
-                        )
-                    }
+                    <MovieList Movies={movies} />
                 </main>
             </div>
         </>
