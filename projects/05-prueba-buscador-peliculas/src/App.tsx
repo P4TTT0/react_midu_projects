@@ -3,6 +3,7 @@ import "./App.css";
 import useMovieSearch from "./customHooks/useMovieSearch";
 import MovieList from "./components/MovieList";
 import useSearch from "./customHooks/useSearch";
+import { useDebounce } from "@uidotdev/usehooks";
 
 export function App()
 {
@@ -10,7 +11,8 @@ export function App()
     
     const [sort, setSort] = useState<boolean>(false);
     const { searchText, setSearchText, error } = useSearch();
-    const { movies, isLoading } = useMovieSearch({ searchText, sort });
+    const debouncedSearchText = useDebounce(searchText, 500);
+    const { movies, isLoading } = useMovieSearch({ searchText: debouncedSearchText, sort });
     
     
     const handleSumbit = (event: React.FormEvent<HTMLFormElement>) =>
@@ -25,6 +27,12 @@ export function App()
         //setSearchText(value);
     }
 
+    const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target!.value;
+        if (value.startsWith(' ')) return;
+        setSearchText(value);
+    }
+
     const handleCheck = () => setSort(!sort);
 
     return(
@@ -37,6 +45,8 @@ export function App()
                             name="searchInput"
                             type="text"
                             placeholder="Harry Potter, Star Wars, Toy Story..."
+                            onChange={handleInput}
+                            value={searchText}
                         />
                         <input type="checkbox" name="sortInput" onChange={handleCheck} checked={sort}/>
                         <button type="submit">Buscar</button>
