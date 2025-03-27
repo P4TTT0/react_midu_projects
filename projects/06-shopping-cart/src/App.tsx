@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ProductList from "./components/ProductList"
 import { products as initialProducts } from "./mocks/products.json";
 import { Product, ProductFilter } from "./types/product";
+import Header from "./components/Header";
 
 function App() {
   const [products, setProducts] = useState<Product[]>(initialProducts)
@@ -21,9 +22,12 @@ function App() {
   }
 
   return (
-    <main>
-      <ProductList products={products}/>
-    </main>
+    <>
+      <Header />
+      <main>
+        <ProductList products={products}/>
+      </main>
+    </>
   )
 }
 
