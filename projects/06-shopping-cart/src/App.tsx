@@ -7,7 +7,7 @@ import Header from "./components/Header";
 function App() {
   const [products, setProducts] = useState<Product[]>(initialProducts)
   const [filter, setFilter] = useState<ProductFilter>({ category: "all", minPrice: 0});
-  useEffect(() => { setProducts(filterProducts(products)) }, [filter]);
+  useEffect(() => { setProducts(filterProducts(initialProducts)) }, [filter]);
 
   const filterProducts = (products: Product[]) => {
     return products.filter(product => {
@@ -21,9 +21,10 @@ function App() {
     });
   }
 
+  //Prop drilling: Utilizar solo si bajamos dos capas, mas de eso utilizar useContext u otras alternativas.
   return (
     <>
-      <Header />
+      <Header changeFilters={setFilter} />
       <main>
         <ProductList products={products}/>
       </main>
