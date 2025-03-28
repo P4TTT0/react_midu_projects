@@ -1,29 +1,26 @@
 import React, { useId, useState } from "react";
 import "./Filters.css"
-import { ProductFilter } from "../types/product";
+import useFilters from "../customHooks/useFilters";
 
-interface FiltersProps {
-    changeFilters: React.Dispatch<React.SetStateAction<ProductFilter>>;
-}
-
-const Filters: React.FC<FiltersProps> = ({ changeFilters }) =>
+const Filters = () =>
 {
     const [minPrice, setMinPrice] = useState<number>(0);
     //UseId genera un identificador para utilizar en los componentes, se genera en medida que los componentes se van construyendo
     const minPriceFilterId = useId();
     const categoryFilterId = useId();
+    const { setFilter } = useFilters();
 
     const handleChangeMinPrice = (event: React.ChangeEvent<HTMLInputElement>) => {
         const priceValue = Number.parseInt(event.target.value);
         setMinPrice(priceValue);
-        changeFilters(previousState => ({
+        setFilter(previousState => ({
             ...previousState,
             minPrice: priceValue
         }));
     }
 
     const handleChangeCategory = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        changeFilters(previousState => ({
+        setFilter(previousState => ({
             ...previousState,
             category: event.target.value    
         }));
