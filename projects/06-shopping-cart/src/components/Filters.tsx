@@ -1,18 +1,16 @@
-import React, { useId, useState } from "react";
+import React, { useId } from "react";
 import "./Filters.css"
 import useFilters from "../customHooks/useFilters";
 
 const Filters = () =>
 {
-    const [minPrice, setMinPrice] = useState<number>(0);
     //UseId genera un identificador para utilizar en los componentes, se genera en medida que los componentes se van construyendo
     const minPriceFilterId = useId();
     const categoryFilterId = useId();
-    const { setFilter } = useFilters();
+    const { filter, setFilter } = useFilters();
 
     const handleChangeMinPrice = (event: React.ChangeEvent<HTMLInputElement>) => {
         const priceValue = Number.parseInt(event.target.value);
-        setMinPrice(priceValue);
         setFilter(previousState => ({
             ...previousState,
             minPrice: priceValue
@@ -37,9 +35,9 @@ const Filters = () =>
                     min={0} 
                     max={1000} 
                     onChange={handleChangeMinPrice}
-                    value={minPrice} 
+                    value={filter.minPrice} 
                 />
-                <span>${minPrice}</span>
+                <span>${filter.minPrice}</span>
             </div>
 
             <div>

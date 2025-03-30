@@ -18,7 +18,7 @@ const useFilters = () => {
         });
     }
 
-    return { filterProducts, setFilter }
+    return { filterProducts, filter, setFilter }
 }
 
 export default useFilters;
