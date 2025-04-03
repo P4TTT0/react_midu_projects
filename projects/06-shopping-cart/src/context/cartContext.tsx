@@ -5,7 +5,9 @@ import { Product } from "../types/product";
 interface CartContextType {
     cart: Product[],
     addToCart: (product: Product) => void,
-    clearCart: () => void
+    clearCart: () => void,
+    checkProductInCart: (product: Product) => boolean,
+    removeFromCart: (product: Product) => void
 };
 
 export const CartContext = createContext<CartContextType | null>(null);
@@ -18,7 +20,8 @@ export const CartProvider: React.FC<ProviderProps> = ({ children }) => {
 
         if (productInCartIndex >= 0) {
             const newCart = structuredClone(cart);
-            newCart[productInCartIndex].quantity += 1;
+            if (newCart[productInCartIndex].quantity) newCart[productInCartIndex].quantity! += 1;
+            else newCart[productInCartIndex].quantity = 1;
             return setCart(newCart);
         }
         setCart(prevCart => ([
@@ -28,14 +31,26 @@ export const CartProvider: React.FC<ProviderProps> = ({ children }) => {
                 quantity: 1
             }
         ]))
+        console.log(cart);
     }
-    const clearCart = () => setCart([])
+
+    const checkProductInCart = (product: Product) => {
+        const productInCartIndex = cart.findIndex(item => item.id == product.id);
+        return productInCartIndex >= 0;
+    }
+
+    const clearCart = () => setCart([]);
+
+    const removeFromCart = (product: Product) => setCart(prevCart => prevCart.filter(item => item.id !== product.id));
+
 
     return (
         <CartContext.Provider value={{
             cart, 
             addToCart, 
-            clearCart
+            clearCart,
+            checkProductInCart,
+            removeFromCart
         }}>
             {children}
         </CartContext.Provider>

@@ -33,3 +33,8 @@
 {
     width: 100%;
 }
+
+.products .in-cart {
+    background-color: rgb(72, 28, 28);
+    color: #fff;
+}

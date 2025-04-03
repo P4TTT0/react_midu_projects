@@ -10,7 +10,7 @@ export interface Product {
     category: string;
     thumbnail: string;
     images: string[];
-    quantity: number;
+    quantity?: number;
 }
   
 export interface ProductResponse {

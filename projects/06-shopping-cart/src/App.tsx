@@ -7,7 +7,12 @@ import { Cart } from "./components/Cart";
 
 function App() {
   const { filterProducts } = useFilters();
-  const filteredProducts = filterProducts(initialProducts);
+  const initialProductsWithQuantity = initialProducts.map(product => ({
+    ...product,
+    quantity: 0 // o el valor por defecto que quieras
+}));
+
+  const filteredProducts = filterProducts(initialProductsWithQuantity);
   //Prop drilling: Utilizar solo si bajamos dos capas, mas de eso utilizar useContext u otras alternativas.
   return (
     <>
