@@ -7,12 +7,12 @@ import { useCartReducer } from "../../customHooks/useCartReducer";
 export const CartProvider: React.FC<ProviderProps> = ({ children }) => {
     const {state, addToCart, removeFromCart, clearCart } = useCartReducer();
 
-  const value: CartContextType = {
-    cart: state,
-    addToCart,
-    removeFromCart,
-    clearCart
-  };
+    const value: CartContextType = {
+        cart: state,
+        addToCart,
+        removeFromCart,
+        clearCart
+    };
 
-  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+    return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };

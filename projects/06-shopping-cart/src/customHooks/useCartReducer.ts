@@ -2,10 +2,14 @@ import { useReducer } from "react";
 import { Product } from "../types/product";
 import { CartActionType } from "../types/cartTypes";
 import { cartReducer } from "../reducers/cartReducer";
+import { getFromLocalStorage } from "../functions/funLocalStorage";
 
 export const useCartReducer = () => {
-    const initialState: Product[] = [];
-    const [state, dispatch] = useReducer(cartReducer, initialState);
+    const getInitialCart = (): Product[] => {
+        return getFromLocalStorage<Product[]>("cart") || [];
+    };
+      
+    const [state, dispatch] = useReducer(cartReducer, getInitialCart());
 
     const addToCart = (product: Product) => dispatch({ type: CartActionType.ADD, payload: product });
 
