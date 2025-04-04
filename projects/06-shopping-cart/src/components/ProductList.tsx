@@ -9,12 +9,12 @@ interface ProductsParams{
 }
 
 const ProductList: React.FC<ProductsParams> = ({ products }) =>{
-    const { addToCart, removeFromCart, checkProductInCart } = useCart();
+    const { cart, addToCart, removeFromCart } = useCart();
     return(
         <main className="products">
             <ul>
                 {products.map(product => {
-                    const isProductInCart = checkProductInCart(product);
+                    const isProductInCart = cart.findIndex(item => item.id == product.id) >= 0;
                     return(
                         <li key={product.id}>
                             <img src={product.thumbnail} alt={product.title} />
