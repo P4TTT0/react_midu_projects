@@ -18,17 +18,19 @@ export const Cart = () => {
 
             <aside className="cart">
                 {
-                    cart.map(item => {
-                        return (
-                            <ul>
-                                <CartItem product={item} addToCart={() => addToCart(item)}/>
-                            </ul>
-                        );
-                    })
+                    <ul>
+                        {
+                            cart.map(item => {
+                                    return (
+                                            <CartItem product={item} addToCart={() => addToCart(item)}/>
+                                    );
+                            })
+                        }
+                    </ul>
                 }
                 {
                     anyProductsInCart 
-                        ? <button onClick={clearCart} className="clear-button"> <ClearCartIcon /> </button>
+                        ? <footer><button onClick={clearCart} className="clear-button"> <ClearCartIcon /> </button></footer>
                         : <p>No has añadido nada al carrito aun :(</p>
                 }    
             </aside>
