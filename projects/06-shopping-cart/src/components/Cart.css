@@ -52,7 +52,7 @@
     height: 32px;
     justify-content: center;
     padding: 4px 20px;
-    position: absolute;
+    position: fixed;
     right: 8px;
     top: 8px;
     transition: all .3s ease;
@@ -63,6 +63,25 @@
   .cart-button:hover {
     scale: 1.1;
   }
+
+  /*
+  200px de ancho +
+  32px de padding de cada lado =
+  264px de ancho total 
+  / 2 = 
+  132px
+
+  140px de ancho +
+  20px de padding de cada lado =
+  180px de ancho total 
+  / 2 =
+  80px
+  */
+  .cart-button:has(+ input:checked) {
+    right: calc(132px - 82px);
+    width: 140px;
+    background-color: #0e1820;
+  }  
   
   .cart-button ~ input:checked ~ .cart {
     height: 100%;
