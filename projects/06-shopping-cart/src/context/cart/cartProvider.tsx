@@ -5,13 +5,14 @@ import { ProviderProps } from "../../types/providerProps";
 import { useCartReducer } from "../../customHooks/useCartReducer";
 
 export const CartProvider: React.FC<ProviderProps> = ({ children }) => {
-    const {state, addToCart, removeFromCart, clearCart } = useCartReducer();
+    const {state, addToCart, removeFromCart, clearCart, decreaseQuantity } = useCartReducer();
 
     const value: CartContextType = {
         cart: state,
         addToCart,
         removeFromCart,
-        clearCart
+        clearCart,
+        decreaseQuantity
     };
 
     return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

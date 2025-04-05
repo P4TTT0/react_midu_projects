@@ -7,7 +7,7 @@ import { CartItem } from "./CartItem";
 
 export const Cart = () => {
     const cartCheckboxId = useId();
-    const { cart, addToCart, clearCart } = useCart();
+    const { cart, addToCart, clearCart, decreaseQuantity } = useCart();
     const anyProductsInCart = cart.length > 0;
     return (
         <>
@@ -21,9 +21,16 @@ export const Cart = () => {
                     <ul>
                         {
                             cart.map(item => {
-                                    return (
-                                            <CartItem product={item} addToCart={() => addToCart(item)}/>
-                                    );
+                                console.log('FUNCTION', decreaseQuantity)
+    console.log('FUNCTION1', addToCart)
+                                return (
+                                        <CartItem 
+                                            key={item.id}
+                                            product={item} 
+                                            addToCart={() => addToCart(item)} 
+                                            decreaseQuantity={() => decreaseQuantity(item)}
+                                        />
+                                );
                             })
                         }
                     </ul>

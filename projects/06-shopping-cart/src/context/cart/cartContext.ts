@@ -1,12 +1,5 @@
 import { createContext } from "react";
-import { Product } from "../../types/product";
-
-interface CartContextType {
-    cart: Product[],
-    addToCart: (product: Product) => void,
-    clearCart: () => void,
-    removeFromCart: (product: Product) => void
-};
+import { CartContextType } from "../../types/cartTypes";
 
 export const CartContext = createContext<CartContextType | null>(null);
 

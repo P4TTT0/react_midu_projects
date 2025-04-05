@@ -1,11 +1,13 @@
 import { Product } from "../types/product";
+import './CartItem.css';
 
 interface CartItemProps {
     product: Product,
-    addToCart: () => void
+    addToCart: () => void,
+    decreaseQuantity: () => void
 }
 
-export const CartItem: React.FC<CartItemProps> = ({ product, addToCart }) => {
+export const CartItem: React.FC<CartItemProps> = ({ product, addToCart, decreaseQuantity }) => {
     return(
         <li>
             <img 
@@ -18,7 +20,10 @@ export const CartItem: React.FC<CartItemProps> = ({ product, addToCart }) => {
             </div>
             <footer>
                 <small> x{product.quantity} </small>
-                <button onClick={addToCart}>+</button>
+                <div className="buttons-container">
+                    <button disabled={product.quantity === 1} onClick={decreaseQuantity}>-</button>
+                    <button onClick={addToCart}>+</button>
+                </div>
             </footer>
         </li>
     );

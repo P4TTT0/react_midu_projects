@@ -32,6 +32,16 @@ export const cartReducer = (state: Product[], action: CartReducerAction): Produc
       break;
     }
 
+    case CartActionType.DECREASE: {
+      const index = state.findIndex(item => item.id === action.payload.id);
+      console.log(index);
+      if (index >= 0) {
+        newState = structuredClone(state);
+        newState[index].quantity = newState[index].quantity! - 1;
+      }
+      break;
+    }
+
     default:
       return state;
   }

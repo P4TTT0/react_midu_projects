@@ -5,9 +5,9 @@ import { FiltersProvider } from './context/filtersContext.tsx'
 import { CartProvider } from './context/cart/cartProvider.tsx'
 
 createRoot(document.getElementById('root')!).render(
-  <FiltersProvider>
-    <CartProvider>
+  <CartProvider>
+    <FiltersProvider>
       <App />
-    </CartProvider>
-  </FiltersProvider>
+    </FiltersProvider>
+  </CartProvider>
 )
