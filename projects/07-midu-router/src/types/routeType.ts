@@ -1,6 +1,4 @@
-import { JSX } from "react";
-
 export interface RouteType { 
     path: string,
-    component: () => JSX.Element
+    component: React.ComponentType<any>;
 }
