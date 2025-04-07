@@ -6,7 +6,6 @@ export const usePath = () => {
     
     useEffect(() => {
     const onLocationChange = () => {
-        console.log('disparo');
         setCurrentPath(window.location.pathname);
     }
 

@@ -1,13 +1,23 @@
 import { HomePage } from "./components/HomePage";
 import { AboutPage } from "./components/AboutPage";
-import { usePath } from "./customHooks/usePath";
+import { RouteType } from "./types/routeType";
+import { Router } from "./components/Router";
+
+const routes: RouteType[] = [
+  {
+    path: "/",
+    component: HomePage
+  },
+  {
+    path: "/abot",
+    component: AboutPage
+  }
+]
 
 function App() {
-  const currenPath = usePath();
   return (
     <main>
-      {currenPath === '/' && <HomePage/>}
-      {currenPath === '/about' && <AboutPage/>}
+      <Router routes={routes}/>
     </main>
   )
 }
