@@ -1,0 +1,15 @@
+a {
+    background-color: transparent;
+    border-color: #ccc;
+    border: 1px solid #ccc;
+    padding: 10px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+a:hover {
+    transform: scale(0.9);
+}

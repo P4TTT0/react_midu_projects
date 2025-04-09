@@ -1,13 +1,17 @@
-import { HomePage } from "./components/HomePage"; // Import estatico
 import { RouteType } from "./types/routeType";
 import { Router } from "./components/Router";
 import { SearchPage } from "./components/SearchPage";
 import { Route } from "./components/Route";
 import { lazy } from "react";
+import { Header } from "./components/Header";
 
 // Cargar SOLO lo que el usuario necesite 
 const LazyAboutPage = lazy(() =>
   import('./components/AboutPage').then((mod) => ({ default: mod.AboutPage }))
+);
+
+const LazyHomePage = lazy(() =>
+  import('./components/HomePage').then((mod) => ({ default: mod.HomePage }))
 );
 
 
@@ -20,12 +24,15 @@ const routes: RouteType[] = [
 
 function App() {
   return (
-    <main>
-      <Router routes={routes}>
-        <Route path="/" component={HomePage}></Route>
-        <Route path="/about" component={LazyAboutPage}></Route>
-      </Router>
-    </main>
+    <>
+      <Header/>
+      <main>
+        <Router routes={routes}>
+          <Route path="/" component={LazyHomePage}></Route>
+          <Route path="/:lang/about" component={LazyAboutPage}></Route>
+        </Router>
+      </main>
+    </>
   )
 }
 

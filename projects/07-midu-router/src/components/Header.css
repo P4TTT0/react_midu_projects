@@ -1,0 +1,46 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 75px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 30px;
+    background-color: #1e1e1e;
+    z-index: 1000;
+    box-sizing: border-box;
+  }
+  
+  header select {
+    background: transparent;
+    color: white;
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+    border-radius: 30px;
+    border-color: rgb(59, 112, 158);
+    padding: 10px 30px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100px;
+    text-align: center;
+  }
+  
+  header select:focus {
+    outline: none;
+    border-radius: 30px;
+  }
+
+  option {
+    background-color: #1e1e1e;
+  }
+
+.options-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+ }
+

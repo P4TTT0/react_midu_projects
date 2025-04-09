@@ -1,5 +1,6 @@
 import React from "react";
 import { navigateTo } from "../logic/navigate";
+import "./Link.css"
 
 interface LinkProps {
     target?: string,

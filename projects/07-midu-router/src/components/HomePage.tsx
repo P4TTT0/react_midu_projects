@@ -1,11 +1,13 @@
-import { Link } from "./Link";
+import { useLanguage } from "../customHooks/useLanguage";
+import { useI18n } from "../translations/useI18n";
 
 export const HomePage = () => {
+    const { language } = useLanguage();
+    const i18n = useI18n(language ?? 'en');
     return (
       <>
         <h1>Home</h1>
-        <p>React Router de @p4ttt0 gracias a @MiduDev</p>
-        <Link to="/about">Sobre mi</Link>
+        <p>{i18n.home.title}</p>
       </>
     );
 }

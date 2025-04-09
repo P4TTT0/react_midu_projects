@@ -1,10 +1,13 @@
-import { Children, JSX, isValidElement } from "react";
+import { Children, JSX, isValidElement, lazy } from "react";
 import { RouteType } from "../types/routeType";
 import { usePath } from "../customHooks/usePath";
-import { Page404 } from "./404";
 import { match } from "path-to-regexp"
 import React from "react";
 import { Route } from "./Route";
+
+const Lazy404Page = lazy(() =>
+  import('./404').then((mod) => ({ default: mod.Page404 }))
+);
 
 interface RouterProps {
     routes: RouteType[],
@@ -12,7 +15,7 @@ interface RouterProps {
     children: React.ReactElement<typeof Route> | React.ReactElement<typeof Route>[]
 }
   
-export const Router: React.FC<RouterProps> = ({ routes, children, defaultComponent = Page404}) => {
+export const Router: React.FC<RouterProps> = ({ routes, children, defaultComponent = Lazy404Page}) => {
     const currenPath = usePath();
 
     let routeParams = {}
