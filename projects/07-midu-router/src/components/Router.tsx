@@ -12,7 +12,7 @@ const Lazy404Page = lazy(() =>
 interface RouterProps {
     routes: RouteType[],
     defaultComponent?: () => JSX.Element,
-    children: React.ReactElement<typeof Route> | React.ReactElement<typeof Route>[]
+    children?: React.ReactElement<typeof Route> | React.ReactElement<typeof Route>[]
 }
   
 export const Router: React.FC<RouterProps> = ({ routes, children, defaultComponent = Lazy404Page}) => {
@@ -29,7 +29,7 @@ export const Router: React.FC<RouterProps> = ({ routes, children, defaultCompone
         }
       });
 
-    const routesToUse = routes.concat(routesFromChildren);
+    const routesToUse = routes.concat(routesFromChildren).filter(Boolean);
     const page = routesToUse.find(route => {
         if (route.path === currenPath) return true;
 

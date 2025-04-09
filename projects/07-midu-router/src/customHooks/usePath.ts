@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { EventType } from "../types/eventType";
+import { getCurrentPath } from "../logic/utils";
 
 export const usePath = () => {
-    const [currenPath, setCurrentPath] = useState<string>(window.location.pathname);
+    const [currenPath, setCurrentPath] = useState<string>(getCurrentPath());
     
     useEffect(() => {
     const onLocationChange = () => {
-        setCurrentPath(window.location.pathname);
+        setCurrentPath(getCurrentPath());
     }
 
     window.addEventListener(EventType.PushState, onLocationChange);
