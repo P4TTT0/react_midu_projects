@@ -1,4 +1,4 @@
-enum SupportedLanguages {
+export enum SupportedLanguages {
     en = 'English',
     es = 'Spanish',
     pt = 'Portuguese'
@@ -6,7 +6,7 @@ enum SupportedLanguages {
   
 type AutoLanguage = 'auto';
   
-type Language = keyof typeof SupportedLanguages | AutoLanguage;
+export type Language = keyof typeof SupportedLanguages | AutoLanguage;
   
 export type FromLanguage = Language;
   

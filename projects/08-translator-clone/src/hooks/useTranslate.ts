@@ -11,11 +11,15 @@ const initialState: TranslateState = {
 }
   
 const actionMap = {
-    [ActionType.SwapLanguage]: (state: TranslateState, _action: SwapLanguageAction): TranslateState => ({
-        ...state,
-        fromLanguage: state.toLanguage,
-        toLanguage: state.fromLanguage as ToLanguage
-    }),
+    [ActionType.SwapLanguage]: (state: TranslateState, _action: SwapLanguageAction): TranslateState => {
+        if (state.fromLanguage === 'auto') return state;
+
+        return {
+            ...state,
+            fromLanguage: state.toLanguage,
+            toLanguage: state.fromLanguage as ToLanguage
+        }
+    },
 
     [ActionType.SetFromLanguage]: (state: TranslateState, action: SetFromLanguageAction): TranslateState => ({
         ...state,
