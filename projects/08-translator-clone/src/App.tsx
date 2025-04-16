@@ -4,6 +4,7 @@ import { useTranslate } from './hooks/useTranslate';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { LanguageSelector } from './components/LanguageSelector';
 import { ArrowsIcon } from './components/Icons';
+import { SectionType } from './types/translate';
 
 function App() {
 
@@ -13,7 +14,7 @@ function App() {
       <h1>Google Translate</h1>
       <Row>
         <Col>
-          <LanguageSelector type='from' value={state.fromLanguage} onChange={setFromLanguage}/>
+          <LanguageSelector type={SectionType.From} value={state.fromLanguage} onChange={setFromLanguage}/>
         </Col>
         <Col>
           <Button variant='link' disabled={state.fromLanguage === 'auto'} onClick={swapLanguages}>
@@ -21,7 +22,7 @@ function App() {
           </Button>
         </Col>
         <Col>
-          <LanguageSelector type='to' value={state.toLanguage} onChange={setToLanguage}/>
+          <LanguageSelector type={SectionType.To} value={state.toLanguage} onChange={setToLanguage}/>
         </Col>
       </Row>
     </Container>

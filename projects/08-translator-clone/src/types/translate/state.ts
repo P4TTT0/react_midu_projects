@@ -7,3 +7,8 @@ export interface TranslateState {
     result: string,
     loading: boolean;
 }
+
+export enum SectionType {
+    From = 'from',
+    To = 'to'
+}
