@@ -1,0 +1,19 @@
+.text-area{
+    height: 150px;
+    resize: none;
+}
+
+.text-area:focus{
+    outline: none;
+    box-shadow: none;
+    font-size: 18px;
+}
+
+.to {
+    border: none;
+}
+
+.caract-len{
+    font-size: 0.75rem;
+    color: #999;
+}
