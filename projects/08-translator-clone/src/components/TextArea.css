@@ -1,6 +1,8 @@
 .text-area{
-    height: 150px;
+    height: 166px;
     resize: none;
+    font-size: 18px;
+    border-radius: 8px;
 }
 
 .text-area:focus{
@@ -13,7 +15,37 @@
     border: none;
 }
 
-.caract-len{
-    font-size: 0.75rem;
+.bottom-icons{
+    width: 100%;
+    height: 70px;
+    padding: 8px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    position: relative;
+    font-size: 0.8rem;
     color: #999;
+    text-align: right;
+    bottom: 82px;
+}
+
+button{
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    border: none;
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+
+button:hover{
+    background-color: #0000001e;
+}
+
+.caracters-container {
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
 }
