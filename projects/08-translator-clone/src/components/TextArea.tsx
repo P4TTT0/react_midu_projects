@@ -1,12 +1,12 @@
 import React, { ChangeEvent } from "react"
 import { Form } from "react-bootstrap"
 import './TextArea.css'
-import { SectionType } from "../types/translate"
+import { SectionType, SupportedVoices, ToLanguage } from "../types/translate"
 import { ClipboardIcon, SpeakerIcon } from "./Icons"
 
 type TextAreaProps = 
-    | { type: SectionType.From, onChange: (value: string) => void, value: string }
-    | { type: SectionType.To, loading: boolean, onChange: (value: string) => void, value: string}
+    | { type: SectionType.From, onChange: (value: string) => void, value: string, language: ToLanguage }
+    | { type: SectionType.To, loading: boolean, onChange: (value: string) => void, value: string, language: ToLanguage}
 
 
 export const TextArea: React.FC<TextAreaProps> = (props) => {
@@ -15,6 +15,14 @@ export const TextArea: React.FC<TextAreaProps> = (props) => {
     const placeholder = isTo
         ? props.loading ? 'Traduciendo...' : 'Traducción'
         : '';
+
+    const handleSpeak = () => {
+        const utterance = new SpeechSynthesisUtterance(props.value);
+        utterance.lang = props.language as SupportedVoices;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+
     return(
         <>
             <Form.Control 
@@ -29,7 +37,7 @@ export const TextArea: React.FC<TextAreaProps> = (props) => {
             />
             <section className="bottom-icons">
                 <div>
-                    <button><SpeakerIcon /></button>
+                    <button onClick={handleSpeak}><SpeakerIcon /></button>
                 </div>
                 <div>
                     { !isTo && <div className="caracters-container"><span>{props.value.length} / 5000</span></div> }

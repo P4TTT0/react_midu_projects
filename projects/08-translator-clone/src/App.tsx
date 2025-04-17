@@ -4,7 +4,7 @@ import { useTranslate } from './hooks/useTranslate';
 import { Container, Row, Col, Button, Stack } from 'react-bootstrap';
 import { LanguageSelector } from './components/LanguageSelector';
 import { ArrowsIcon } from './components/Icons';
-import { SectionType } from './types/translate';
+import { SectionType, ToLanguage } from './types/translate';
 import { TextArea } from './components/TextArea';
 import { useEffect } from 'react';
 import { translate } from './services/translateService';
@@ -36,7 +36,8 @@ function App() {
         <Col>
           <Stack gap={2}>
             <LanguageSelector type={SectionType.From} value={state.fromLanguage} onChange={setFromLanguage}/>
-            <TextArea type={SectionType.From} value={state.fromText} onChange={setFromText}/>
+            { /*TODO: Mejorar el tipado del LANGUAGE ya que no es legible.*/ }
+            <TextArea type={SectionType.From} value={state.fromText} onChange={setFromText} language={state.fromLanguage as ToLanguage}/>
           </Stack>
         </Col>
         <Col xs='auto'>
@@ -47,7 +48,7 @@ function App() {
         <Col>
           <Stack gap={2}>
               <LanguageSelector type={SectionType.To} value={state.toLanguage} onChange={setToLanguage}/>
-              <TextArea type={SectionType.To} value={state.result} loading={state.loading} onChange={setResult}/>
+              <TextArea type={SectionType.To} value={state.result} loading={state.loading} onChange={setResult} language={state.toLanguage}/>
           </Stack>
         </Col>
       </Row>
