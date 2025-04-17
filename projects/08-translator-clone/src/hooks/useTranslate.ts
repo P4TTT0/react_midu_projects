@@ -13,34 +13,54 @@ const initialState: TranslateState = {
 const actionMap = {
     [ActionType.SwapLanguage]: (state: TranslateState, _action: SwapLanguageAction): TranslateState => {
         if (state.fromLanguage === 'auto') return state;
+        const loading = state.fromText !== '';
 
         return {
             ...state,
+            loading: loading,
+            fromText: state.result,
+            result: '',
             fromLanguage: state.toLanguage,
             toLanguage: state.fromLanguage as ToLanguage
         }
     },
 
-    [ActionType.SetFromLanguage]: (state: TranslateState, action: SetFromLanguageAction): TranslateState => ({
-        ...state,
-        fromLanguage: action.payload
-    }),
+    [ActionType.SetFromLanguage]: (state: TranslateState, action: SetFromLanguageAction): TranslateState => {
+        if (state.fromLanguage === action.payload) return state;
+        const loading = state.fromText !== '';
 
-    [ActionType.SetToLanguage]: (state: TranslateState, action: SetToLanguageAction): TranslateState => ({
-        ...state,
-        toLanguage: action.payload
-    }),
+        return {
+            ...state,
+            fromLanguage: action.payload,
+            result: '',
+            loading: loading
+        }
+    },
 
-    [ActionType.SetFromText]: (state: TranslateState, action: SetFromTextAction): TranslateState => ({
-        ...state,
-        loading: true,
-        fromText: action.payload
-    }),
+    [ActionType.SetToLanguage]: (state: TranslateState, action: SetToLanguageAction): TranslateState => {
+        if(state.toLanguage === action.payload) return state;
+        const loading = state.fromText !== '';
+
+        return {
+            ...state,
+            toLanguage: action.payload,
+            loading: loading
+        }
+    },
+
+    [ActionType.SetFromText]: (state: TranslateState, action: SetFromTextAction): TranslateState => {
+        const loading = state.fromText !== '';
+        return{
+            ...state,
+            loading: loading,
+            fromText: action.payload
+        }
+    },
 
     [ActionType.SetResult]: (state: TranslateState, action: SetResultAction): TranslateState => ({
         ...state,
         loading: false,
-        fromText: action.payload
+        result: action.payload
     }),
 };
 
