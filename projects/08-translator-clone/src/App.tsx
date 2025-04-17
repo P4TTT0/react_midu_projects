@@ -1,15 +1,34 @@
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useTranslate } from './hooks/useTranslate';
-import { Container, Row, Col, Button, Form, Stack } from 'react-bootstrap';
+import { Container, Row, Col, Button, Stack } from 'react-bootstrap';
 import { LanguageSelector } from './components/LanguageSelector';
 import { ArrowsIcon } from './components/Icons';
 import { SectionType } from './types/translate';
 import { TextArea } from './components/TextArea';
+import { useEffect } from 'react';
+import { translate } from './services/translateService';
+import { useDebounce } from './hooks/useDebounce';
 
 function App() {
 
   const { state, setFromLanguage, setToLanguage, swapLanguages, setResult, setFromText } = useTranslate();
+
+  const debouncedFromText = useDebounce(state.fromText, 400);
+
+  useEffect(() => {
+    if (debouncedFromText === '') return;
+
+    translate({
+      text: debouncedFromText, 
+      fromLanguage: state.fromLanguage,
+      toLanguage: state.toLanguage
+    }).then(result => {
+      setResult(result);
+    })
+
+  },[debouncedFromText, state.fromLanguage, state.toLanguage])
+
   return (
     <Container fluid>
       <h1>Google Translate</h1>
