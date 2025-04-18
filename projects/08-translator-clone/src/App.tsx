@@ -9,12 +9,14 @@ import { TextArea } from './components/TextArea';
 import { useEffect } from 'react';
 import { translate } from './services/translateService';
 import { useDebounce } from './hooks/useDebounce';
+import { useSnackbar } from 'notistack';
 
 function App() {
 
+  const { enqueueSnackbar } = useSnackbar();
   const { state, setFromLanguage, setToLanguage, swapLanguages, setResult, setFromText } = useTranslate();
 
-  const debouncedFromText = useDebounce(state.fromText, 400);
+  const debouncedFromText = useDebounce(state.fromText, 300);
 
   useEffect(() => {
     if (debouncedFromText === '') return;
@@ -25,6 +27,8 @@ function App() {
       toLanguage: state.toLanguage
     }).then(result => {
       setResult(result);
+    }).catch(error => {
+      enqueueSnackbar(error);
     })
 
   },[debouncedFromText, state.fromLanguage, state.toLanguage])

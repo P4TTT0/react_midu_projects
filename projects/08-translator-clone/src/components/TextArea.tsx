@@ -3,6 +3,7 @@ import { Form } from "react-bootstrap"
 import './TextArea.css'
 import { SectionType, SupportedVoices, ToLanguage } from "../types/translate"
 import { ClipboardIcon, SpeakerIcon } from "./Icons"
+import { useSnackbar } from "notistack"
 
 type TextAreaProps = 
     | { type: SectionType.From, onChange: (value: string) => void, value: string, language: ToLanguage }
@@ -10,6 +11,7 @@ type TextAreaProps =
 
 
 export const TextArea: React.FC<TextAreaProps> = (props) => {
+    const { enqueueSnackbar } = useSnackbar();
     const isTo = props.type === SectionType.To;
     const className = `text-area ${isTo ? 'to' : 'from'}`;
     const placeholder = isTo
@@ -21,6 +23,11 @@ export const TextArea: React.FC<TextAreaProps> = (props) => {
         utterance.lang = props.language as SupportedVoices;
         utterance.rate = 0.9;
         speechSynthesis.speak(utterance);
+    }
+
+    const handleCopyToClipboard = () => {
+        navigator.clipboard.writeText(props.value)
+        enqueueSnackbar('Traducción copiada')
     }
 
     return(
@@ -37,11 +44,11 @@ export const TextArea: React.FC<TextAreaProps> = (props) => {
             />
             <section className="bottom-icons">
                 <div>
-                    <button onClick={handleSpeak}><SpeakerIcon /></button>
+                    <button hidden={props.value === ''} onClick={handleSpeak}><SpeakerIcon /></button>
                 </div>
                 <div>
                     { !isTo && <div className="caracters-container"><span>{props.value.length} / 5000</span></div> }
-                    { isTo && <button onClick={() => navigator.clipboard.writeText(props.value)}><ClipboardIcon/></button>}
+                    { isTo && <button hidden={props.value === ''} onClick={handleCopyToClipboard}><ClipboardIcon/></button>}
                 </div>
             </section>
         </>
