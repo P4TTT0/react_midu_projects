@@ -53,7 +53,8 @@ const actionMap = {
         return{
             ...state,
             loading: loading,
-            fromText: action.payload
+            fromText: action.payload,
+            result: ''
         }
     },
 
