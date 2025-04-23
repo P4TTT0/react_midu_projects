@@ -1,11 +1,11 @@
 import './App.css'
-import Table from './components/Table'
+import UserTable from './components/UserTable'
 
 function App() {
   return (
     <>
       <h1>Proyecto con Redux</h1>
-      <Table/>
+      <UserTable/>
     </>
   )
 }
